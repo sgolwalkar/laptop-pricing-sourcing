@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptop Pricing Sourcing</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0b0f;
+    --surface: #111318;
+    --border: #22263a;
+    --accent-lo: #c8f240;
+    --accent-hi: #f0c840;
+    --text: #e2e4ee;
+    --muted: #555a72;
+    --muted2: #888da8;
+  }
+
+  html, body { height: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  /* ── grid background ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,242,64,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,242,64,.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── nav ── */
+  nav {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted2);
+  }
+
+  .nav-logo span { color: var(--accent-lo); }
+
+  .nav-meta {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── hero ── */
+  .hero {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 40px 40px;
+  }
+
+  .kicker {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent-lo);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    opacity: 0;
+    animation: fadeUp .5s .1s ease forwards;
+  }
+
+  .kicker::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent-lo);
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: var(--text);
+    margin-bottom: 12px;
+    opacity: 0;
+    animation: fadeUp .6s .2s ease forwards;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--accent-lo);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted2);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-top: 20px;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp .6s .35s ease forwards;
+  }
+
+  /* ── cards ── */
+  .cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    max-width: 860px;
+    opacity: 0;
+    animation: fadeUp .6s .5s ease forwards;
+  }
+
+  .card {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 32px 32px;
+    overflow: hidden;
+    transition: border-color .25s ease, transform .25s ease;
+    cursor: pointer;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,242,64,.05) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity .3s ease;
+    pointer-events: none;
+  }
+
+  .card:hover {
+    border-color: var(--accent-lo);
+    transform: translateY(-3px);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card.hi .card-accent { color: var(--accent-hi); }
+  .card.hi:hover { border-color: var(--accent-hi); }
+  .card.hi::before { background: linear-gradient(135deg, rgba(240,200,64,.05) 0%, transparent 60%); }
+
+  .card-range {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 18px;
+  }
+
+  .card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--accent-lo);
+    margin-bottom: 16px;
+    transition: letter-spacing .2s ease;
+  }
+
+  .card.hi .card-price { color: var(--accent-hi); }
+  .card:hover .card-price { letter-spacing: 0.04em; }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: var(--muted2);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+  }
+
+  .card-count {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-arrow {
+    font-size: 18px;
+    color: var(--accent-lo);
+    transition: transform .2s ease;
+    line-height: 1;
+  }
+
+  .card.hi .card-arrow { color: var(--accent-hi); }
+  .card:hover .card-arrow { transform: translate(4px, -4px); }
+
+  .card-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .tag {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--muted2);
+  }
+
+  /* ── footer ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-right {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── large decorative number ── */
+  .deco-num {
+    position: fixed;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 520px;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(200,242,64,.04);
+    pointer-events: none;
+    z-index: 0;
+    user-select: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    nav, .hero, footer { padding-left: 24px; padding-right: 24px; }
+    .cards { grid-template-columns: 1fr; }
+    h1 { font-size: 72px; }
+    .deco-num { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="deco-num" aria-hidden="true">$</div>
+
+<nav>
+  <div class="nav-logo">Laptop <span>Pricing</span> Sourcing</div>
+  <div class="nav-meta">March 2026 · US MSRP</div>
+</nav>
+
+<main class="hero">
+  <div class="kicker">Market intelligence · All OEMs · 2025–2026</div>
+  <h1>LAPTOP<br><em>PRICING</em><br>SOURCING</h1>
+  <p class="subtitle">Comprehensive spec and pricing comparisons across all major laptop OEMs. Select a price tier to explore the full comparison sheet.</p>
+
+  <div class="cards">
+
+    <!-- Sheet 1: Under $1,000 -->
+    <a class="card" href="laptops-under-1000.html">
+      <div class="card-range">Tier 01 · Entry to Mid</div>
+      <div class="card-price">$1K−</div>
+      <div class="card-title">Under $1,000</div>
+      <div class="card-tags">
+        <span class="tag">Apple Silicon</span>
+        <span class="tag">RTX 5050</span>
+        <span class="tag">RTX 5060</span>
+        <span class="tag">Ultraportable</span>
+      </div>
+      <div class="card-desc">Apple, Acer, HP, MSI, ASUS and more — from the MacBook Neo at $599 to gaming rigs at the $1K ceiling, including deal-watch flagged models.</div>
+      <div class="card-footer">
+        <span class="card-count">6 laptops · 5 OEMs</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </a>
+
+    <!-- Sheet 2: $1,000–$2,000 -->
+    <a class="card hi" href="laptops-1000-2000.html">
+      <div class="card-range">Tier 02 · Mid to Premium</div>
+      <div class="card-price">$1–2K</div>
+      <div class="card-title">$1,000 – $2,000</div>
+      <div class="card-tags">
+        <span class="tag">RTX 5070</span>
+        <span class="tag">Apple M4 Pro</span>
+        <span class="tag">Creator</span>
+        <span class="tag">Gaming</span>
+      </div>
+      <div class="card-desc">Apple MacBook Pro, ASUS ROG &amp; TUF, Lenovo Legion, Razer Blade, Dell XPS, HP OMEN, Gigabyte Aero — the full mid-to-premium landscape.</div>
+      <div class="card-footer">
+        <span class="card-count">12 laptops · 8 OEMs</span>
+        <span class="card-arrow">↗</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-left">Laptop Pricing Sourcing · Internal Reference</div>
+  <div class="footer-right">Prices reflect US MSRP · March 2026</div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptops Under $1,000 — 2025/2026 Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e2a;
+    --border: #2a2f40;
+    --accent: #c8f240;
+    --accent2: #4af0c4;
+    --accent3: #f0804a;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --tag-bg: #1e2330;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    max-width: 1400px;
+    margin: 0 auto 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::after {
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 64px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  h1 span {
+    color: var(--accent);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.7;
+    margin-top: 4px;
+  }
+
+  /* Category tabs */
+  .filters {
+    max-width: 1400px;
+    margin: 0 auto 28px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0d0f14;
+    font-weight: 600;
+  }
+
+  /* Table container */
+  .table-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    min-width: 900px;
+  }
+
+  thead {
+    border-bottom: 1px solid var(--border);
+  }
+
+  th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 14px 20px;
+    text-align: left;
+    white-space: nowrap;
+    background: rgba(200, 242, 64, 0.04);
+    font-weight: 400;
+  }
+
+  th:first-child { border-radius: 12px 0 0 0; }
+  th:last-child { border-radius: 0 12px 0 0; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+    cursor: pointer;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+
+  tbody tr:hover {
+    background: var(--surface2);
+  }
+
+  td {
+    padding: 16px 20px;
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  /* OEM cell */
+  .oem-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .oem-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .model-name {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Price badge */
+  .price {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* Category badge */
+  .cat-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .cat-ultra { background: rgba(74, 240, 196, 0.12); color: var(--accent2); border: 1px solid rgba(74, 240, 196, 0.2); }
+  .cat-general { background: rgba(200, 242, 64, 0.1); color: var(--accent); border: 1px solid rgba(200, 242, 64, 0.2); }
+  .cat-gaming { background: rgba(240, 128, 74, 0.12); color: var(--accent3); border: 1px solid rgba(240, 128, 74, 0.2); }
+  .cat-2in1 { background: rgba(180, 120, 240, 0.12); color: #c09af0; border: 1px solid rgba(180, 120, 240, 0.2); }
+
+  /* Spec pills */
+  .spec-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 11.5px;
+    color: var(--text);
+  }
+
+  .spec-line {
+    display: flex;
+    gap: 6px;
+  }
+
+  .spec-key {
+    color: var(--muted);
+    min-width: 36px;
+  }
+
+  /* Tagline */
+  .tagline {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+    max-width: 260px;
+  }
+
+  .tagline strong {
+    color: var(--text);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  /* Battery */
+  .battery {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .battery-bar-wrap {
+    width: 80px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .battery-bar {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent2);
+  }
+
+  .battery-label {
+    font-size: 11px;
+    color: var(--text);
+  }
+
+  /* Weight */
+  .weight {
+    font-size: 12px;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  /* OS tag */
+  .os-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+
+  .os-mac { background: rgba(255,255,255,0.08); color: #d0d4e0; border: 1px solid rgba(255,255,255,0.1); }
+  .os-win { background: rgba(0, 120, 215, 0.15); color: #82b8f0; border: 1px solid rgba(0, 120, 215, 0.25); }
+
+  /* Legend */
+  .legend {
+    max-width: 1400px;
+    margin: 24px auto 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* Footer note */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s ease;
+    margin-bottom: 28px;
+  }
+  .back-link:hover { color: var(--accent); }
+  .back-link .arrow { font-size: 14px; transition: transform .2s ease; display: inline-block; }
+  .back-link:hover .arrow { transform: translateX(-3px); }
+
+  .footnote {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Animated row reveal */
+  tbody tr {
+    opacity: 0;
+    animation: fadeUp 0.4s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  tbody tr:nth-child(1)  { animation-delay: 0.05s; }
+  tbody tr:nth-child(2)  { animation-delay: 0.10s; }
+  tbody tr:nth-child(3)  { animation-delay: 0.15s; }
+  tbody tr:nth-child(4)  { animation-delay: 0.20s; }
+  tbody tr:nth-child(5)  { animation-delay: 0.25s; }
+  tbody tr:nth-child(6)  { animation-delay: 0.30s; }
+  tbody tr:nth-child(7)  { animation-delay: 0.35s; }
+  tbody tr:nth-child(8)  { animation-delay: 0.40s; }
+  tbody tr:nth-child(9)  { animation-delay: 0.45s; }
+  tbody tr:nth-child(10) { animation-delay: 0.50s; }
+
+  /* Scrollbar */
+  .table-wrap::-webkit-scrollbar { height: 4px; }
+  .table-wrap::-webkit-scrollbar-track { background: var(--bg); }
+  .table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  /* Hidden row */
+  tr.hidden-row { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-link" href="index.html"><span class="arrow">←</span> Laptop Pricing Sourcing</a>
+  <div class="eyebrow">Market Overview · 2025 / 2026</div>
+  <h1>Laptops <span>Under $1,000</span></h1>
+  <p class="subtitle">All major OEMs compared — pricing, specs, and brand positioning at a glance. Prices reflect current US MSRP or street price.</p>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterRows('all', this)">All</button>
+  <button class="filter-btn" onclick="filterRows('ultraportable', this)">Ultraportable</button>
+  <button class="filter-btn" onclick="filterRows('general', this)">General Purpose</button>
+  <button class="filter-btn" onclick="filterRows('gaming', this)">Gaming</button>
+  <button class="filter-btn" onclick="filterRows('2in1', this)">2-in-1</button>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>OEM / Model</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>OS</th>
+        <th>CPU</th>
+        <th>RAM / Storage</th>
+        <th>Display</th>
+        <th>Weight</th>
+        <th>Battery</th>
+        <th>Brand Tagline</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Apple MacBook Neo -->
+      <tr data-cat="general">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Apple</span>
+            <span class="model-name">MacBook Neo 13" (A18 Pro, 2026)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-general">General</span></td>
+        <td><span class="price">$599</span></td>
+        <td><span class="os-tag os-mac">macOS Tahoe</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Apple A18 Pro (6-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> 5-core integrated</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 8 GB unified</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 256 GB (512 GB opt.)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 13"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2408×1506 Liquid Retina</div>
+            <div class="spec-line"><span class="spec-key">Type</span> IPS LCD</div>
+          </div>
+        </td>
+        <td><span class="weight">TBD</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:88%;"></div></div>
+            <span class="battery-label">Up to 16 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"The magic of Mac at a breakthrough price"</strong> — Apple's most affordable laptop ever, powered by an iPhone-class A18 Pro chip, targeting Chromebook and entry-level Windows users.</span></td>
+      </tr>
+
+      <!-- Apple MacBook Air -->
+      <tr data-cat="ultraportable">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Apple</span>
+            <span class="model-name">MacBook Air 13" (M4, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-ultra">Ultraportable</span></td>
+        <td><span class="price">$999</span></td>
+        <td><span class="os-tag os-mac">macOS</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Apple M4 (10-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> 8-core integrated</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB unified</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 256 GB</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 13.6"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1664 Retina</div>
+            <div class="spec-line"><span class="spec-key">Type</span> IPS LCD</div>
+          </div>
+        </td>
+        <td><span class="weight">2.7 lb / 1.24 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:90%;"></div></div>
+            <span class="battery-label">Up to 18 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Speed of Lightness"</strong> — blaze through work and play with up to 18 hours of battery life in an incredibly portable design.</span></td>
+      </tr>
+
+      <!-- Acer Nitro V 16 AI -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Acer</span>
+            <span class="model-name">Nitro V 16 AI (2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">~$999</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen AI 7 350</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5060 8 GB GDDR7</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB DDR5</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 1920×1200 WUXGA IPS</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 180 Hz</div>
+          </div>
+        </td>
+        <td><span class="weight">~5.1 lb / 2.3 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:55%;"></div></div>
+            <span class="battery-label">8–12 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Best bang for your gaming buck"</strong> — RTX 5060 GDDR7 and a 180 Hz display under $1,000, making it one of the most capable gaming laptops at this price point.</span></td>
+      </tr>
+
+      <!-- HP Victus 15 RTX 5060 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">HP</span>
+            <span class="model-name">Victus 15 RTX 5060 (2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$899.99</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen AI 7 350</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5060 8 GB GDDR7 (80W)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB DDR5</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 15.6"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 1920×1080 FHD IPS</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 144 Hz</div>
+          </div>
+        </td>
+        <td><span class="weight">~5.0 lb / 2.27 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:38%;"></div></div>
+            <span class="battery-label">~6–8 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Game on without breaking the bank"</strong> — the most affordable RTX 5060 laptop available, though the 80W power limit trims 7–20% GPU performance vs. fully-powered 5060 machines.</span></td>
+      </tr>
+
+
+      <!-- MSI Katana 15 HX -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">MSI</span>
+            <span class="model-name">Katana 15 HX (B14W, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$999</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Intel Core i7-14650HX</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5050 8 GB</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB DDR5 (upgradable)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 512 GB (upgradable)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 15.6"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 1920×1080 IPS</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 144 Hz</div>
+          </div>
+        </td>
+        <td><span class="weight">5.1 lb / 2.3 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:30%;"></div></div>
+            <span class="battery-label">~5–6 hrs gaming</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Sharpen Your Game"</strong> — HX-series processor power with RTX 50-series graphics, upgradeability, and 4-zone RGB at the $1K ceiling.</span></td>
+      </tr>
+
+      <!-- ASUS TUF Gaming A16 - Deal Watch -->
+      <tr data-cat="gaming" style="opacity:0.8;">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">ASUS <span style="font-size:10px;background:rgba(240,128,74,0.18);color:var(--accent3);border:1px solid rgba(240,128,74,0.35);padding:2px 8px;border-radius:100px;font-family:'DM Mono',monospace;letter-spacing:0.08em;vertical-align:middle;">⚡ DEAL WATCH</span></span>
+            <span class="model-name">TUF Gaming A16 (FA608, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td>
+          <span class="price" style="color:var(--accent3);">~$1,000+</span>
+          <div style="font-size:10px;color:var(--muted);margin-top:3px;">Dips ~$999 on sale</div>
+        </td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen 7 260</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5060 8 GB GDDR7 (100W)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16–32 GB DDR5</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 512 GB–1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 1920×1200 FHD+ / 2.5K</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 165 Hz G-Sync</div>
+          </div>
+        </td>
+        <td><span class="weight">~5.5 lb / 2.5 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:80%;background:var(--accent3);"></div></div>
+            <span class="battery-label">Up to 14 hrs (90 Wh)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Ready for Anything"</strong> — fastest RTX 5060 implementation tested, MIL-STD-810H durability, and a record-breaking 14-hour battery. MSRP is just over $1K but watch for discounts at Newegg and Best Buy.</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span class="cat-badge cat-ultra">Ultraportable</span></span>
+  <span class="legend-item"><span class="cat-badge cat-general">General</span></span>
+  <span class="legend-item"><span class="cat-badge cat-gaming">Gaming</span></span>
+  <span class="legend-item"><span class="cat-badge cat-2in1">2-in-1</span></span>
+  <span style="font-size:11px;color:var(--muted);margin-left:8px;">· Battery bars scaled to 32 hrs max</span>
+</div>
+
+<div class="footnote">
+  <strong style="color:var(--text);">Notes:</strong> Prices reflect US MSRP or current street pricing as of early 2026 and may vary by configuration, retailer, and promotions. Specs shown represent the most common base or mid-tier configuration under $1,000. Battery life figures are manufacturer or reviewer estimates under light-use conditions. Sources: Apple Newsroom, ASUS Pressroom, PCWorld, Tom's Hardware, Engadget, Windows Central.
+</div>
+
+<script>
+  function filterRows(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('tbody tr').forEach(row => {
+      if (cat === 'all' || row.dataset.cat === cat) {
+        row.classList.remove('hidden-row');
+      } else {
+        row.classList.add('hidden-row');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

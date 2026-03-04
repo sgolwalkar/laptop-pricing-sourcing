@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laptops $1,000–$2,000 — 2025/2026 Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e2a;
+    --border: #2a2f40;
+    --accent: #c8f240;
+    --accent2: #4af0c4;
+    --accent3: #f0804a;
+    --accent4: #f0c840;
+    --text: #e8eaf0;
+    --muted: #7a8099;
+    --tag-bg: #1e2330;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    max-width: 1400px;
+    margin: 0 auto 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent4);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .eyebrow::after {
+    content: '';
+    display: inline-block;
+    height: 1px;
+    width: 64px;
+    background: var(--accent4);
+    opacity: 0.6;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 5vw, 64px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  h1 span {
+    color: var(--accent4);
+  }
+
+  .subtitle {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 520px;
+    line-height: 1.7;
+    margin-top: 4px;
+  }
+
+  .filters {
+    max-width: 1400px;
+    margin: 0 auto 28px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--accent4);
+    border-color: var(--accent4);
+    color: #0d0f14;
+    font-weight: 600;
+  }
+
+  .table-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    min-width: 960px;
+  }
+
+  thead { border-bottom: 1px solid var(--border); }
+
+  th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent4);
+    padding: 14px 20px;
+    text-align: left;
+    white-space: nowrap;
+    background: rgba(240, 200, 64, 0.04);
+    font-weight: 400;
+  }
+
+  th:first-child { border-radius: 12px 0 0 0; }
+  th:last-child  { border-radius: 0 12px 0 0; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+    cursor: default;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+
+  td { padding: 16px 20px; vertical-align: top; line-height: 1.5; }
+
+  .oem-cell { display: flex; flex-direction: column; gap: 3px; }
+
+  .oem-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .model-name { font-size: 11px; color: var(--muted); font-style: italic; }
+
+  .price {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent4);
+    white-space: nowrap;
+  }
+
+  .cat-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .cat-ultra   { background: rgba(74,240,196,.12); color: var(--accent2); border: 1px solid rgba(74,240,196,.2); }
+  .cat-general { background: rgba(200,242,64,.10); color: var(--accent); border: 1px solid rgba(200,242,64,.2); }
+  .cat-gaming  { background: rgba(240,128,74,.12); color: var(--accent3); border: 1px solid rgba(240,128,74,.2); }
+  .cat-creator { background: rgba(180,120,240,.12); color: #c09af0; border: 1px solid rgba(180,120,240,.2); }
+  .cat-pro     { background: rgba(240,200,64,.12); color: var(--accent4); border: 1px solid rgba(240,200,64,.2); }
+
+  .spec-stack { display: flex; flex-direction: column; gap: 4px; font-size: 11.5px; color: var(--text); }
+  .spec-line  { display: flex; gap: 6px; }
+  .spec-key   { color: var(--muted); min-width: 36px; }
+
+  .tagline { font-size: 11.5px; color: var(--muted); font-style: italic; line-height: 1.6; max-width: 260px; }
+  .tagline strong { color: var(--text); font-style: normal; font-weight: 400; }
+
+  .battery { display: flex; flex-direction: column; gap: 4px; }
+  .battery-bar-wrap { width: 80px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .battery-bar { height: 100%; border-radius: 2px; background: var(--accent2); }
+  .battery-label { font-size: 11px; color: var(--text); }
+
+  .weight { font-size: 12px; color: var(--text); white-space: nowrap; }
+
+  .os-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; letter-spacing: 0.08em; }
+  .os-mac { background: rgba(255,255,255,.08); color: #d0d4e0; border: 1px solid rgba(255,255,255,.1); }
+  .os-win { background: rgba(0,120,215,.15); color: #82b8f0; border: 1px solid rgba(0,120,215,.25); }
+
+  .deal-badge {
+    display: inline-block;
+    font-size: 9px;
+    background: rgba(240,128,74,.18);
+    color: var(--accent3);
+    border: 1px solid rgba(240,128,74,.35);
+    padding: 2px 7px;
+    border-radius: 100px;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+
+  .legend {
+    max-width: 1400px;
+    margin: 24px auto 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 8px; font-size: 11px; color: var(--muted); }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color .2s ease;
+    margin-bottom: 28px;
+  }
+  .back-link:hover { color: var(--accent4); }
+  .back-link .arrow { font-size: 14px; transition: transform .2s ease; display: inline-block; }
+  .back-link:hover .arrow { transform: translateX(-3px); }
+
+  .footnote {
+    max-width: 1400px;
+    margin: 40px auto 0;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  tbody tr { opacity: 0; animation: fadeUp 0.4s ease forwards; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  tbody tr:nth-child(1)  { animation-delay: .05s; }
+  tbody tr:nth-child(2)  { animation-delay: .10s; }
+  tbody tr:nth-child(3)  { animation-delay: .15s; }
+  tbody tr:nth-child(4)  { animation-delay: .20s; }
+  tbody tr:nth-child(5)  { animation-delay: .25s; }
+  tbody tr:nth-child(6)  { animation-delay: .30s; }
+  tbody tr:nth-child(7)  { animation-delay: .35s; }
+  tbody tr:nth-child(8)  { animation-delay: .40s; }
+  tbody tr:nth-child(9)  { animation-delay: .45s; }
+  tbody tr:nth-child(10) { animation-delay: .50s; }
+  tbody tr:nth-child(11) { animation-delay: .55s; }
+  tbody tr:nth-child(12) { animation-delay: .60s; }
+
+  .table-wrap::-webkit-scrollbar { height: 4px; }
+  .table-wrap::-webkit-scrollbar-track { background: var(--bg); }
+  .table-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  tr.hidden-row { display: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-link" href="index.html"><span class="arrow">←</span> Laptop Pricing Sourcing</a>
+  <div class="eyebrow">Market Overview · 2025 / 2026</div>
+  <h1>Laptops <span>$1,000–$2,000</span></h1>
+  <p class="subtitle">All major OEMs in the mid-to-premium tier — from workhorses to powerhouse gaming rigs and pro creative machines. Prices reflect current US MSRP or street price.</p>
+</header>
+
+<div class="filters">
+  <button class="filter-btn active" onclick="filterRows('all', this)">All</button>
+  <button class="filter-btn" onclick="filterRows('ultraportable', this)">Ultraportable</button>
+  <button class="filter-btn" onclick="filterRows('general', this)">General / Pro</button>
+  <button class="filter-btn" onclick="filterRows('gaming', this)">Gaming</button>
+  <button class="filter-btn" onclick="filterRows('creator', this)">Creator</button>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>OEM / Model</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>OS</th>
+        <th>CPU</th>
+        <th>RAM / Storage</th>
+        <th>Display</th>
+        <th>Weight</th>
+        <th>Battery</th>
+        <th>Brand Tagline</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Apple MacBook Air 15 M4 -->
+      <tr data-cat="ultraportable">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Apple</span>
+            <span class="model-name">MacBook Air 15" (M4, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-ultra">Ultraportable</span></td>
+        <td><span class="price">$1,199</span></td>
+        <td><span class="os-tag os-mac">macOS</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Apple M4 (10-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> 10-core integrated</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB unified</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 256 GB (512 GB opt.)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 15.3"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2880×1864 Liquid Retina</div>
+            <div class="spec-line"><span class="spec-key">Type</span> IPS LCD, 500 nits</div>
+          </div>
+        </td>
+        <td><span class="weight">3.3 lb / 1.51 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:90%"></div></div>
+            <span class="battery-label">Up to 18 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Speed of Lightness, supersized"</strong> — all the M4 MacBook Air magic on a bigger 15" canvas with a 6-speaker sound system and all-day battery at a $100 lower entry price than the M3 generation.</span></td>
+      </tr>
+
+      <!-- Apple MacBook Pro 14 M4 -->
+      <tr data-cat="creator">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Apple</span>
+            <span class="model-name">MacBook Pro 14" (M4, 2024)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-creator">Creator</span></td>
+        <td><span class="price">$1,599</span></td>
+        <td><span class="os-tag os-mac">macOS</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Apple M4 (10-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> 10-core integrated</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB unified</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 512 GB</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 14.2"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 3024×1964 Liquid Retina XDR</div>
+            <div class="spec-line"><span class="spec-key">Type</span> mini-LED, 1600 nits peak, 120Hz ProMotion</div>
+          </div>
+        </td>
+        <td><span class="weight">3.5 lb / 1.6 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:96%"></div></div>
+            <span class="battery-label">Up to 24 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Built for the pros who build everything else"</strong> — Liquid Retina XDR display, ProMotion 120Hz, 3 Thunderbolt 4 ports, HDMI, SD card, and class-leading battery in the most capable base MacBook Pro ever made.</span></td>
+      </tr>
+
+      <!-- ASUS ROG Zephyrus G14 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">ASUS ROG</span>
+            <span class="model-name">Zephyrus G14 (GA403UP, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$1,799–$2,099</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen 9 270 (16-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7 (90W)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 32 GB LPDDR5X (on-board)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 14"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2880×1800 3K OLED</div>
+            <div class="spec-line"><span class="spec-key">Type</span> ROG Nebula OLED, 120Hz, G-Sync</div>
+          </div>
+        </td>
+        <td><span class="weight">3.31 lb / 1.5 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:55%"></div></div>
+            <span class="battery-label">~10 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"You don't need to be big to be mighty"</strong> — RTX 5070 in a sub-3.4 lb aluminum chassis with a stunning 3K OLED, making it the best portable gaming laptop on the market for its size.</span></td>
+      </tr>
+
+      <!-- Lenovo Legion 5 Gen 10 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Lenovo</span>
+            <span class="model-name">Legion 5i 15 (Gen 10, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$1,399–$1,649</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Intel Core i9-14900HX (24-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7 (115W)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16–32 GB DDR5 (upgradable)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 15.1"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1600 WQXGA OLED</div>
+            <div class="spec-line"><span class="spec-key">Type</span> 165Hz, Dolby Vision True Black</div>
+          </div>
+        </td>
+        <td><span class="weight">4.1 lb / 1.86 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:38%"></div></div>
+            <span class="battery-label">~6–7 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"The best mainstream gamer"</strong> — full-power 115W RTX 5070 paired with a flagship Intel CPU and a stunning WQXGA OLED panel, regularly discounted well below MSRP.</span></td>
+      </tr>
+
+      <!-- Razer Blade 14 2025 RTX 5060 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Razer</span>
+            <span class="model-name">Blade 14 (2025) — RTX 5060</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$1,999</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen AI 9 365 (10-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5060 8 GB GDDR7 (115W)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB LPDDR5X-8000 (soldered)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 14"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2880×1800 3K OLED</div>
+            <div class="spec-line"><span class="spec-key">Type</span> 120Hz, 0.2ms, G-Sync, Calman verified</div>
+          </div>
+        </td>
+        <td><span class="weight">3.59 lb / 1.63 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:58%"></div></div>
+            <span class="battery-label">Up to 11 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"The thinnest Blade ever"</strong> — premium matte-black T6 aluminum chassis at just 0.62" thin, with a gorgeous 3K OLED and all-day battery. Be aware: soldered RAM and a "Razer tax" premium vs. comparable spec laptops.</span></td>
+      </tr>
+
+      <!-- Dell XPS 14 2026 -->
+      <tr data-cat="general">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Dell</span>
+            <span class="model-name">XPS 14 (2026)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-general">General / Pro</span></td>
+        <td><span class="price">$1,350–$1,800</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Intel Core Ultra 5/7 (Panther Lake)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> Intel Xe3 integrated (no dGPU)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16–32 GB LPDDR5X</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 512 GB–2 TB</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 14"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 1920×1200 LCD or 2880×1800 OLED</div>
+            <div class="spec-line"><span class="spec-key">Type</span> up to 120Hz tandem OLED</div>
+          </div>
+        </td>
+        <td><span class="weight">~3.3 lb / 1.5 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:78%"></div></div>
+            <span class="battery-label">Est. 14–16 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"The XPS is back"</strong> — machined aluminum, Gorilla Glass, tandem OLED options, and 3 Thunderbolt 4 ports in a 14.6mm thin redesign; note there is no discrete GPU option on the base models.</span></td>
+      </tr>
+
+      <!-- HP OMEN 16 Slim -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">HP</span>
+            <span class="model-name">OMEN 16 Slim (2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$1,199–$1,399</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Intel Core Ultra 7 255H</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 32 GB DDR5-5600</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1600 2K IPS</div>
+            <div class="spec-line"><span class="spec-key">Type</span> 165Hz, micro-edge</div>
+          </div>
+        </td>
+        <td><span class="weight">~4.85 lb / 2.2 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:42%"></div></div>
+            <span class="battery-label">~7–8 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"OMEN by HP — Built to dominate"</strong> — RTX 5070 with 32GB of RAM at one of the most competitive price points in the mid-range gaming tier, in a slim chassis aimed at outperforming the competition on value.</span></td>
+      </tr>
+
+      <!-- ASUS Zenbook S 16 -->
+      <tr data-cat="ultraportable">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">ASUS</span>
+            <span class="model-name">Zenbook S 16 (UM5606, 2024/25)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-ultra">Ultraportable</span></td>
+        <td><span class="price">$1,299–$1,599</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen AI 9 HX 370 (12-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> AMD Radeon 890M integrated</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 32 GB LPDDR5X</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2880×1800 3K OLED</div>
+            <div class="spec-line"><span class="spec-key">Type</span> 120Hz, 100% DCI-P3</div>
+          </div>
+        </td>
+        <td><span class="weight">2.65 lb / 1.2 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:75%"></div></div>
+            <span class="battery-label">Up to 14 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"The best ultrabook of 2025"</strong> — an extraordinary ceraluminum chassis, 3K OLED, and class-leading Zen 5 performance in a barely-there 1.2 kg design.</span></td>
+      </tr>
+
+      <!-- Lenovo Yoga 9i 2-in-1 -->
+      <tr data-cat="general">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Lenovo</span>
+            <span class="model-name">Yoga 9i 2-in-1 14 Aura (2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-general">General / Pro</span></td>
+        <td><span class="price">$1,299–$1,599</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Intel Core Ultra 7 258V</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> Intel Arc 140V integrated</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16–32 GB LPDDR5X</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 14"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2880×1800 OLED touch</div>
+            <div class="spec-line"><span class="spec-key">Type</span> 120Hz, 360° hinge, stylus</div>
+          </div>
+        </td>
+        <td><span class="weight">~3.09 lb / 1.4 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:80%"></div></div>
+            <span class="battery-label">Up to 15 hrs</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Premium 2-in-1 intelligence"</strong> — Aura Edition AI enhancements, rotating OLED touchscreen with stylus, and premium glass-fiber palm rest in Lenovo's flagship convertible.</span></td>
+      </tr>
+
+      <!-- Gigabyte Aero X16 -->
+      <tr data-cat="creator">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">Gigabyte</span>
+            <span class="model-name">Aero X16 Copilot+ (2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-creator">Creator</span></td>
+        <td><span class="price">~$1,799</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen AI 7 350</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 32 GB DDR5 (2 slots, upgradable)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe 4 (2 M.2 slots)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1600 QHD+ IPS matte</div>
+            <div class="spec-line"><span class="spec-key">Type</span> 165Hz, 100% DCI-P3, bright</div>
+          </div>
+        </td>
+        <td><span class="weight">~4.2 lb / 1.9 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:60%"></div></div>
+            <span class="battery-label">~10–12 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Flagship performance, upgradeability built in"</strong> — RTX 5070, 32GB RAM, two M.2 slots for future upgrades, HDMI 2.1, and DisplayPort — a creator-focused powerhouse that outpaces many comparably priced rivals.</span></td>
+      </tr>
+
+      <!-- ASUS TUF Gaming A18 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">ASUS TUF</span>
+            <span class="model-name">TUF Gaming A18 (FA608, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$1,799</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen 7 260</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 16 GB DDR5-5600 (upgradable)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe Gen 4 (upgradable)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 18"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1600 2.5K IPS</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 240Hz, 100% DCI-P3, G-Sync</div>
+          </div>
+        </td>
+        <td><span class="weight">~6.2 lb / 2.8 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:58%"></div></div>
+            <span class="battery-label">~10–14 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Big screen. Bigger performance."</strong> — ASUS's first ever 18" TUF laptop, with RTX 5070, a massive 2.5K 240Hz display, MIL-STD-810H durability, and user-upgradeable RAM and SSD slots.</span></td>
+      </tr>
+
+      <!-- ASUS TUF Gaming F16 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">ASUS TUF</span>
+            <span class="model-name">TUF Gaming F16 (FX608, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">$1,999</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> Intel Core Ultra 9 275HX (24-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 32 GB DDR5-5600 (upgradable)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe Gen 4 (2× M.2 slots)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1600 2.5K IPS</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 165Hz, 100% sRGB, G-Sync</div>
+          </div>
+        </td>
+        <td><span class="weight">~5.5 lb / 2.5 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:45%"></div></div>
+            <span class="battery-label">~8–10 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"Ready for anything"</strong> — Intel's flagship HX chip paired with RTX 5070, MIL-STD-810H toughness, 2nd-gen Arc Flow Fans, and dual M.2 upgrade slots at the top of TUF's 16" lineup.</span></td>
+      </tr>
+
+      <!-- ASUS ROG Strix G16 AMD RTX 5070 -->
+      <tr data-cat="gaming">
+        <td>
+          <div class="oem-cell">
+            <span class="oem-name">ASUS ROG</span>
+            <span class="model-name">ROG Strix G16 AMD (G614, 2025)</span>
+          </div>
+        </td>
+        <td><span class="cat-badge cat-gaming">Gaming</span></td>
+        <td><span class="price">~$1,775–$2,099</span></td>
+        <td><span class="os-tag os-win">Windows 11</span></td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">CPU</span> AMD Ryzen 9 9955HX (16-core)</div>
+            <div class="spec-line"><span class="spec-key">GPU</span> NVIDIA RTX 5070 8 GB GDDR7 (140W)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">RAM</span> 32 GB DDR5-5600 (2 slots)</div>
+            <div class="spec-line"><span class="spec-key">SSD</span> 1 TB PCIe Gen 4 (PCIe 5 upgradable)</div>
+          </div>
+        </td>
+        <td>
+          <div class="spec-stack">
+            <div class="spec-line"><span class="spec-key">Size</span> 16"</div>
+            <div class="spec-line"><span class="spec-key">Res</span> 2560×1600 ROG Nebula 2.5K</div>
+            <div class="spec-line"><span class="spec-key">Rfrsh</span> 240Hz, 3ms, 100% DCI-P3, G-Sync</div>
+          </div>
+        </td>
+        <td><span class="weight">~5.51 lb / 2.5 kg</span></td>
+        <td>
+          <div class="battery">
+            <div class="battery-bar-wrap"><div class="battery-bar" style="width:42%"></div></div>
+            <span class="battery-label">~7–10 hrs (light)</span>
+          </div>
+        </td>
+        <td><span class="tagline"><strong>"For Those Who Dare"</strong> — full-power 140W RTX 5070 with ROG's premium Nebula 240Hz display, vapor chamber cooling, and Ryzen 9 9955HX in ROG's mid-range flagship — often discounted ~$300 below MSRP at Newegg.</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="legend">
+  <span class="legend-item"><span class="cat-badge cat-ultra">Ultraportable</span></span>
+  <span class="legend-item"><span class="cat-badge cat-general">General / Pro</span></span>
+  <span class="legend-item"><span class="cat-badge cat-gaming">Gaming</span></span>
+  <span class="legend-item"><span class="cat-badge cat-creator">Creator</span></span>
+  <span style="font-size:11px;color:var(--muted);margin-left:8px;">· Battery bars scaled to 24 hrs max</span>
+</div>
+
+<div class="footnote">
+  <strong style="color:var(--text);">Notes:</strong> Prices reflect US MSRP or current street pricing as of March 2026 and may vary by configuration, retailer, and promotions. Specs shown represent the most common base or mid-tier configuration in the $1,000–$2,000 range. Battery life figures are manufacturer or reviewer estimates under light-use conditions. The Razer Blade 14 RTX 5060 starts at $1,999 — note that the RTX 5070 config is $2,299+. Sources: Apple Newsroom, ASUS Pressroom, Razer Newsroom, Tom's Guide, Tom's Hardware, PCWorld, Notebookcheck, TechRadar, PC Gamer.
+</div>
+
+<script>
+  function filterRows(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('tbody tr').forEach(row => {
+      if (cat === 'all' || row.dataset.cat === cat) {
+        row.classList.remove('hidden-row');
+      } else {
+        row.classList.add('hidden-row');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
